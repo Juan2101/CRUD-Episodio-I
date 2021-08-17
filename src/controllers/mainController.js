@@ -11,11 +11,11 @@ const controller = {
 		return res.render(path.join(__dirname, "..", "views", "index"), {products, toThousand})
 	},
 	search: (req, res) => {
-		let keyWord = req.query.keywords
+		let keyWord = req.query.keywords.toLowerCase().trim()
 		let resultado = []
 
 		products.forEach(product => {
-			product.name.includes(keyWord) || product.category.includes(keyWord) || product.description.includes(keyWord)  ? resultado.push(product) : null
+			product.name.toLowerCase().includes(keyWord) ||  product.description.toLowerCase().includes(keyWord)  ? resultado.push(product) : null
 		});
 
 		console.log(resultado.length);

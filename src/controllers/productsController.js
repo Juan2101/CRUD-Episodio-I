@@ -26,7 +26,22 @@ const controller = {
 	
 	// Create -  Method to store
 	store: (req, res) => {
-		return res.send("Producto agregado")
+
+		let product = {
+			id: +products.length + 1,
+			name: req.body.name,
+			price: +req.body.price,
+			discount: +req.body.discount,
+			category: req.body.category,
+			description: req.body.description,
+			image: "default-image.png"
+		}
+
+		products.push(product)
+
+		fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2), "utf-8")
+
+		return res.redirect("/products")
 	},
 
 	// Update - Form to edit
@@ -37,12 +52,32 @@ const controller = {
 	},
 	// Update - Method to update
 	update: (req, res) => {
-		return res.send("Producto editado")
+
+		let {name, price, discount, category, description} = req.body   
+
+		products.forEach(product => {
+			if (product.id === +req.params.id) {
+				product.name = name
+				product.price = +price
+				product.discount = +discount
+				product.category = category
+				product.description = description
+			}
+		});
+		
+		fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2), "utf-8")
+
+		return res.redirect("/products/detail/" + req.params.id)
 	},
 
 	// Delete - Delete one product from DB
 	destroy : (req, res) => {
-		return res.send("producto eliminado")
+
+		let delate = products.filter(product => product.id !== +req.params.id)
+
+		fs.writeFileSync(productsFilePath, JSON.stringify(delate, null, 2), "utf-8")
+
+		return res.redirect("/products")
 	}
 };
 

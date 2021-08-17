@@ -30,7 +30,7 @@
 										</figure>
 										<article class="product-box_data">
 											<h2>
-												$<%= toThousand(products[i].price) %>
+												$<%= toThousand((products[i].price * (100 -products[i].discount)) / 100 ) %>
 											</h2>
 											<% if( products[i].discount != 0) { %> 
 												<span> <%= products[i].discount %> % OFF</span>
@@ -65,7 +65,7 @@
 											<img src="/images/products/<%= products[i].image %>" alt="imagen de producto">
 										</figure>
 										<article class="product-box_data">
-											<h2> $<%= toThousand(products[i].price) %> </h2>
+											<h2> $<%= toThousand((products[i].price * (100 -products[i].discount)) / 100 ) %> </h2>
 											<% if( products[i].discount != 0) { %> 
 											<span> <%= products[i].discount %> % OFF</span>
 											<% } %> 

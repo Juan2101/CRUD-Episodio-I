@@ -28,8 +28,10 @@
 							</figure>
 							<article class="product-box_data">
 								<h2>$<%= toThousand(resultado[i].price) %> </h2>
+								<% if (resultado[i].discount !== 0) { %>
 								<span><%= resultado[i].discount %> % OFF</span>
 								<p><%= resultado[i].name %> </p>
+								<% } %>
 								<i class="fas fa-truck"></i>
 							</article>
 						</a>
